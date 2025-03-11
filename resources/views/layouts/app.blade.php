@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @auth
-    <meta name="user-id" content="{{ Auth::id() }}">
-    @endauth
     <title>{{ $title_site ?? config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ asset('/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/introjs.min.css') }}">
@@ -65,40 +62,7 @@
     <meta name="application-name" content="My Application">
     <meta name="msapplication-config" content="./browserconfig.xml">
 
-    <style>
-        /* Стили для собственных уведомлений */
-        #custom-notification-container {
-            font-family: var(--onest);
-        }
-        .custom-notification {
-            cursor: default;
-            overflow: hidden;
-        }
-        .custom-notification-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            color: var(--black);
-        }
-        .custom-notification-close {
-            cursor: pointer;
-            font-size: 20px;
-            line-height: 1;
-        }
-        .custom-notification-body {
-            color: var(--black);
-            font-size: 14px;
-        }
-        .unread-marker {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #ff3b3b;
-            margin-left: 5px;
-        }
-    </style>
+    
     
     <script>
         wow = new WOW({

@@ -29,8 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Настройка обработчика для входящих сообщений в активном окне
     setupMessageHandler();
     
-    // Инициализация службы уведомлений только при соответствующем разрешении
+    // Инициализация службы уведомлений
     initializeNotifications();
+    
+    // Глобальный доступ к функциям уведомлений
+    window.firebaseNotifications = {
+        showBrowserNotification,
+        showModalNotification,
+        requestNotificationPermission
+    };
 });
 
 // Настройка обработки входящих сообщений 
@@ -41,7 +48,7 @@ function setupMessageHandler() {
     onMessage(messaging, (payload) => {
         console.log('Получено сообщение в активном окне:', payload);
         
-        // Показываем уведомление, даже если приложение в фокусе
+        // Показываем нативное браузерное уведомление
         showBrowserNotification(
             payload.notification?.title || 'Новое сообщение', 
             payload.notification?.body || '',
@@ -55,6 +62,11 @@ function setupMessageHandler() {
             payload.data?.chatId,
             payload.data?.chatType
         );
+        
+        // Обновляем счетчики непрочитанных сообщений, если возможно
+        if (typeof updateUnreadCounters === 'function') {
+            updateUnreadCounters();
+        }
     });
 }
 
@@ -99,19 +111,31 @@ function showNotificationPermissionBanner() {
     document.body.appendChild(notificationBanner);
 
     document.getElementById('allow-notifications').addEventListener('click', () => {
-        Notification.requestPermission().then(permission => {
-            console.log('Пользователь ' + (permission === 'granted' ? 'разрешил' : 'не разрешил') + ' уведомления');
-            notificationBanner.remove();
-            
-            if (permission === 'granted') {
-                registerServiceWorker();
-            }
-        });
+        requestNotificationPermission();
     });
 
     document.getElementById('close-notification-banner').addEventListener('click', () => {
         notificationBanner.remove();
     });
+}
+
+// Функция для запроса разрешений на уведомления
+function requestNotificationPermission() {
+    if (!('Notification' in window)) return;
+    
+    Notification.requestPermission()
+        .then(permission => {
+            console.log('Пользователь ' + (permission === 'granted' ? 'разрешил' : 'не разрешил') + ' уведомления');
+            const banner = document.querySelector('.notification-permission-banner');
+            if (banner) banner.remove();
+            
+            if (permission === 'granted') {
+                registerServiceWorker();
+            }
+        })
+        .catch(err => {
+            console.error('Ошибка при запросе разрешения на уведомления:', err);
+        });
 }
 
 // Регистрация Service Worker и получение токена
@@ -199,9 +223,11 @@ function showBrowserNotification(title, body, data = {}) {
             // Создаем и показываем уведомление
             const notification = new Notification(title, {
                 body: body,
-                icon: '/path/to/icon.png', // Замените на путь к вашей иконке
+                icon: '/storage/icon/notification-icon.png', // Путь к иконке
+                badge: '/storage/icon/badge-icon.png', // Значок для мобильных уведомлений
                 tag: `chat-${data?.chatId || 'general'}`, // Группировка уведомлений
                 data: data,
+                vibrate: [200, 100, 200], // Паттерн вибрации для мобильных
                 requireInteraction: true, // Уведомление не исчезает автоматически
                 renotify: true // Уведомлять даже если предыдущее уведомление не закрыто
             });
@@ -234,6 +260,9 @@ function showBrowserNotification(title, body, data = {}) {
         } catch (error) {
             console.error('Ошибка при создании браузерного уведомления:', error);
         }
+    } else if (Notification.permission !== 'denied') {
+        // Если разрешения еще нет, запрашиваем его
+        requestNotificationPermission();
     }
 }
 
@@ -427,8 +456,64 @@ function showModalNotification(title, body, chatId, chatType) {
     }, 8000);
 }
 
+// Функция для обновления счетчиков непрочитанных сообщений
+function updateUnreadCounters() {
+    // Если пользователь авторизован и есть CSRF токен
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    if (!csrfToken) return;
+
+    fetch('/chats/unread-counts', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(data => {
+        if (data.unread_counts && data.unread_counts.length > 0) {
+            // Обновляем счетчик в шапке, если есть такой элемент
+            const headerCounter = document.querySelector('.header-messages-counter');
+            if (headerCounter) {
+                const totalUnread = data.unread_counts.reduce((sum, chat) => sum + chat.unread_count, 0);
+                headerCounter.textContent = totalUnread;
+                headerCounter.style.display = totalUnread > 0 ? 'inline-block' : 'none';
+            }
+            
+            // Обновляем счетчики в списке чатов, если есть такой элемент
+            data.unread_counts.forEach(chat => {
+                const chatElement = document.querySelector(`[data-chat-id="${chat.id}"][data-chat-type="${chat.type}"]`);
+                if (chatElement) {
+                    let unreadCountElement = chatElement.querySelector('.unread-count');
+                    if (!unreadCountElement && chat.unread_count > 0) {
+                        unreadCountElement = document.createElement('span');
+                        unreadCountElement.className = 'unread-count';
+                        const chatName = chatElement.querySelector('h5');
+                        if (chatName) chatName.appendChild(unreadCountElement);
+                    }
+                    
+                    if (unreadCountElement) {
+                        if (chat.unread_count > 0) {
+                            unreadCountElement.textContent = chat.unread_count;
+                            unreadCountElement.style.display = 'inline-block';
+                        } else {
+                            unreadCountElement.remove();
+                        }
+                    }
+                }
+            });
+        }
+    })
+    .catch(e => console.error('Ошибка при обновлении счетчиков сообщений:', e));
+}
+
 // Экспорт функций для возможности использования в других модулях
 export {
     showBrowserNotification,
-    showModalNotification
+    showModalNotification,
+    requestNotificationPermission,
+    updateUnreadCounters
 };

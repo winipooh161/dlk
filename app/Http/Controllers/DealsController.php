@@ -195,7 +195,6 @@ class DealsController extends Controller
                 'payment_date'   => 'nullable|date',
                 'execution_comment' => 'nullable|string',
                 'comment'        => 'nullable|string',
-                'office_equipment' => 'nullable|boolean',
                 'measurement_comments' => 'nullable|string|max:1000',
                 'measurements_file'    => 'nullable|file|mimes:pdf,jpg,jpeg,png,dwg|max:5120',
                 'start_date'           => 'nullable|date',
@@ -232,7 +231,6 @@ class DealsController extends Controller
                 'responsibles.*'    => 'exists:users,id',
             ]);
 
-            $office_equipment = $request->has('office_equipment') ? 1 : 0;
             $coordinatorId = $validated['coordinator_id'] ?? auth()->id();
 
             $deal = Deal::create([
@@ -255,7 +253,6 @@ class DealsController extends Controller
                 'payment_date' => $validated['payment_date'] ?? null,
                 'execution_comment' => $validated['execution_comment'] ?? null,
                 'comment' => $validated['comment'] ?? null,
-                'office_equipment' => $office_equipment,
                 'measurement_comments' => $validated['measurement_comments'] ?? null,
                 'start_date' => $validated['start_date'] ?? null,
                 'project_duration' => $validated['project_duration'] ?? null,
@@ -382,7 +379,6 @@ class DealsController extends Controller
                 'payment_date' => 'nullable|date',
                 'execution_comment' => 'nullable|string',
                 'comment' => 'nullable|string',
-                'office_equipment' => 'nullable|boolean',
                 'measurement_comments' => 'nullable|string|max:1000',
                 'measurements_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,dwg|max:5120',
                 'start_date' => 'nullable|date',

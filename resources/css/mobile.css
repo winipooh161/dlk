@@ -154,7 +154,7 @@
         border-radius: 0;
         padding: var(--p10);
         position: relative;
-        margin: 0 !important;!i;!;
+        margin: 0 !important;
         }
     .chat-box {
                         width: 100%;
@@ -193,18 +193,7 @@
     margin-right: 10px;
 }
 
-.emoji-picker {
-    display: none;
-    position: absolute;
-    bottom: 50px;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    max-width: 200px;
-    overflow-y: auto;
-    max-height: 150px;
-}
+
 
 .emoji-item {
     cursor: pointer;
@@ -218,10 +207,7 @@
     .chat-messages li  {
         min-width: 60%;
     }
-    .faq_item {
-
-        
-    }
+    .faq_item {width: 100%;}
 
     .deal__chat__user {
         width: 100%;
@@ -288,9 +274,8 @@
     .button__points {
         display: -webkit-box;
         display: -ms-flexbox;
-        display: flex
-    ;
-        min-height: 110px;
+        display: flex;
+        min-height: 100%;
         overflow-y: hidden;
         gap: var(--g10);
         background: var(--fff);

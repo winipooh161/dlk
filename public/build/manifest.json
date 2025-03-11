@@ -10,8 +10,8 @@
     "file": "assets/index.esm2017-NZQW5Whv.js",
     "name": "index.esm2017"
   },
-  "_notification-Unum4wLs.js": {
-    "file": "assets/notification-Unum4wLs.js",
+  "_notification-CPSyS8dc.js": {
+    "file": "assets/notification-CPSyS8dc.js",
     "name": "notification",
     "imports": [
       "_firebase-init-WlDQV2z_.js"
@@ -40,7 +40,7 @@
     "isEntry": true
   },
   "resources/css/element.css": {
-    "file": "assets/element-DGI6Hz8F.css",
+    "file": "assets/element-BJ6PwHb_.css",
     "src": "resources/css/element.css",
     "isEntry": true
   },
@@ -50,12 +50,12 @@
     "isEntry": true
   },
   "resources/css/mobile.css": {
-    "file": "assets/mobile-Cs7wsE1_.css",
+    "file": "assets/mobile-B12vDqiT.css",
     "src": "resources/css/mobile.css",
     "isEntry": true
   },
   "resources/css/style.css": {
-    "file": "assets/style-dKPyN8zl.css",
+    "file": "assets/style-IPeRfHnm.css",
     "src": "resources/css/style.css",
     "isEntry": true
   },
@@ -130,12 +130,12 @@
     ]
   },
   "resources/js/chat-main.js": {
-    "file": "assets/chat-main-Cvv3Eeft.js",
+    "file": "assets/chat-main-KcpiyADt.js",
     "name": "chat-main",
     "src": "resources/js/chat-main.js",
     "isEntry": true,
     "imports": [
-      "_notification-Unum4wLs.js",
+      "_notification-CPSyS8dc.js",
       "_firebase-init-WlDQV2z_.js",
       "_index.esm2017-NZQW5Whv.js"
     ]
@@ -147,14 +147,14 @@
     "isEntry": true
   },
   "resources/js/chat.js": {
-    "file": "assets/chat-idAbRvGV.js",
+    "file": "assets/chat-dAd_NQMn.js",
     "name": "chat",
     "src": "resources/js/chat.js",
     "isEntry": true,
     "imports": [
       "_index.esm2017-NZQW5Whv.js",
       "_firebase-init-WlDQV2z_.js",
-      "_notification-Unum4wLs.js"
+      "_notification-CPSyS8dc.js"
     ]
   },
   "resources/js/emoji-picker.js": {
@@ -197,7 +197,7 @@
     "isEntry": true
   },
   "resources/js/notification.js": {
-    "file": "assets/notification-CTIFT5uF.js",
+    "file": "assets/notification-Bw0gDOSs.js",
     "name": "notification",
     "src": "resources/js/notification.js",
     "isEntry": true,

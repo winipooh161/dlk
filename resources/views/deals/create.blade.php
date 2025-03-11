@@ -167,10 +167,7 @@
             <label for="comment">Общий комментарий:</label>
             <textarea id="comment" name="comment" class="form-control" rows="3" maxlength="1000"></textarea>
         </div>
-        <div class="form-group-deal">
-            <label for="office_equipment">Оборудование офиса:</label>
-            <input type="checkbox" id="office_equipment" name="office_equipment" value="1">
-        </div>
+        <!-- Удален чекбокс "Оборудование офиса" -->
     </fieldset>
 
     <!-- БЛОК 3: Работа над проектом -->

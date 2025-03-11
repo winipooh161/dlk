@@ -37,7 +37,7 @@ class Deal extends Model
 
         // Новые поля (Общие)
         'completion_responsible',
-        'office_equipment',
+        // 'office_equipment', // удалено
         'coordinator_score',
         'measuring_cost',
         'project_budget',

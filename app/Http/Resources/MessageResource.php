@@ -38,6 +38,7 @@ class MessageResource extends JsonResource
             'sender_name'        => $this->sender->name ?? 'Unknown',
             'sender_avatar'      => $this->sender->avatar_url ?? '/user/avatar/default.png',
             'is_pinned'          => $this->is_pinned,
+            'is_system'          => $this->is_system,
             'message_type'       => $this->message_type, // ('text', 'file' или 'notification')
             'attachments'        => $attachments,
             'created_at'         => $this->created_at->toDateTimeString(),

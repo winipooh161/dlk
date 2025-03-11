@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $is_read
  * @property \DateTime|null $read_at
  * @property bool $is_pinned
- * @property bool $is_system
  * @property string $message_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -33,7 +32,6 @@ class Message extends Model
         'is_read',
         'read_at',
         'is_pinned',
-        'is_system',
         'message_type',
         'attachments',
         'file_path'
@@ -43,7 +41,6 @@ class Message extends Model
         'is_read' => 'boolean',
         'read_at' => 'datetime',
         'is_pinned' => 'boolean',
-        'is_system' => 'boolean',
         'attachments' => 'array'
     ];
 

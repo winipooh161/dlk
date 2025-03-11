@@ -13,8 +13,7 @@ export default async () => {
       laravel.default({
         input: [
           'resources/js/bootstrap.js',
-          'resources/js/notification.js', 
-'resources/js/chat-main.js',
+          'resources/js/chat-main.js',
           'resources/js/message-actions.js',
           'resources/js/emoji-picker.js',
           'resources/js/chat-utils.js',

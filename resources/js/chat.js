@@ -1,10 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, onMessage } from "firebase/messaging";
-import { showBrowserNotification, showModalNotification } from './firebase-init';
+import { showBrowserNotification, showModalNotification, sendFirebaseNotification } from './firebase-init';
 import { initializeEmojiPicker } from './emoji-picker';
 import { attachMessageActionListeners } from './message-actions';
 import { formatTime, escapeHtml, scrollToBottom, filterMessages, renderMessages } from './chat-utils';
-import { showChatNotification, checkForNewMessages } from './notification';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Проверяем и запрашиваем разрешения на уведомления, если еще не запрошены
@@ -112,6 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderMessages([data.message], data.message.sender_id, loadedMessageIds, csrfToken, currentChatType, currentChatId);
                 chatMessageInput.value = '';
                 document.querySelector('.file-input').value = '';
+                
+                // Отправка уведомления через Firebase
+                if (data.message.receiver && data.message.receiver.firebase_token) {
+                    sendFirebaseNotification(data.message.receiver.firebase_token, 'Новое сообщение', data.message.message, {
+                        chatId: currentChatId,
+                        chatType: currentChatType,
+                        messageId: data.message.id
+                    });
+                }
             }
         })
         .catch(e => console.error('Ошибка при отправке сообщения:', e));

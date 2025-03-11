@@ -1,6 +1,10 @@
 {
-  "_firebase-init-BVv5jLoC.js": {
-    "file": "assets/firebase-init-BVv5jLoC.js",
+  "_chat-utils-CE2qhhRJ.js": {
+    "file": "assets/chat-utils-CE2qhhRJ.js",
+    "name": "chat-utils"
+  },
+  "_firebase-init-DbTOy2-U.js": {
+    "file": "assets/firebase-init-DbTOy2-U.js",
     "name": "firebase-init",
     "imports": [
       "_index.esm2017-NZQW5Whv.js"
@@ -9,13 +13,6 @@
   "_index.esm2017-NZQW5Whv.js": {
     "file": "assets/index.esm2017-NZQW5Whv.js",
     "name": "index.esm2017"
-  },
-  "_notification-B-GzNNPc.js": {
-    "file": "assets/notification-B-GzNNPc.js",
-    "name": "notification",
-    "imports": [
-      "_firebase-init-BVv5jLoC.js"
-    ]
   },
   "public/css/animate.css": {
     "file": "assets/animate-CRehqwWP.css",
@@ -120,24 +117,22 @@
     "src": "resources/fonts/andantinoscript.ttf"
   },
   "resources/js/bootstrap.js": {
-    "file": "assets/bootstrap-DIO583Q1.js",
+    "file": "assets/bootstrap-E1m5TINw.js",
     "name": "bootstrap",
     "src": "resources/js/bootstrap.js",
     "isEntry": true,
     "imports": [
-      "_firebase-init-BVv5jLoC.js",
+      "_firebase-init-DbTOy2-U.js",
       "_index.esm2017-NZQW5Whv.js"
     ]
   },
   "resources/js/chat-main.js": {
-    "file": "assets/chat-main-6IybhdA7.js",
+    "file": "assets/chat-main-CgkRqwSJ.js",
     "name": "chat-main",
     "src": "resources/js/chat-main.js",
     "isEntry": true,
     "imports": [
-      "_notification-B-GzNNPc.js",
-      "_firebase-init-BVv5jLoC.js",
-      "_index.esm2017-NZQW5Whv.js"
+      "_chat-utils-CE2qhhRJ.js"
     ]
   },
   "resources/js/chat-utils.js": {
@@ -147,14 +142,14 @@
     "isEntry": true
   },
   "resources/js/chat.js": {
-    "file": "assets/chat-qRo2WE9D.js",
+    "file": "assets/chat-BXHxai-4.js",
     "name": "chat",
     "src": "resources/js/chat.js",
     "isEntry": true,
     "imports": [
       "_index.esm2017-NZQW5Whv.js",
-      "_firebase-init-BVv5jLoC.js",
-      "_notification-B-GzNNPc.js"
+      "_firebase-init-DbTOy2-U.js",
+      "_chat-utils-CE2qhhRJ.js"
     ]
   },
   "resources/js/emoji-picker.js": {
@@ -195,16 +190,6 @@
     "name": "modal",
     "src": "resources/js/modal.js",
     "isEntry": true
-  },
-  "resources/js/notification.js": {
-    "file": "assets/notification-BchZ6o3_.js",
-    "name": "notification",
-    "src": "resources/js/notification.js",
-    "isEntry": true,
-    "imports": [
-      "_firebase-init-BVv5jLoC.js",
-      "_index.esm2017-NZQW5Whv.js"
-    ]
   },
   "resources/js/success.js": {
     "file": "assets/success-kIPrc5gy.js",

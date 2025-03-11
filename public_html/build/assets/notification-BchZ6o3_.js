@@ -1,7 +1,0 @@
-import{u as o,r as a}from"./firebase-init-BVv5jLoC.js";import"./index.esm2017-NZQW5Whv.js";document.addEventListener("DOMContentLoaded",()=>{c(),setInterval(()=>{o()},3e4),r()});function c(){"Notification"in window&&Notification.permission!=="granted"&&Notification.permission!=="denied"&&s(),d()}function s(){if(document.querySelector(".notification-permission-banner"))return;const t=document.createElement("div");t.className="notification-permission-banner",t.innerHTML=`
-        <div class="notification-banner-content">
-            <p>Разрешите уведомления, чтобы быть в курсе новых сообщений</p>
-            <button id="allow-notifications" class="btn btn-primary">Разрешить</button>
-            <button id="close-notification-banner" class="btn btn-secondary">Позже</button>
-        </div>
-    `,document.body.appendChild(t),document.getElementById("allow-notifications").addEventListener("click",()=>{a(),t.remove()}),document.getElementById("close-notification-banner").addEventListener("click",()=>{t.remove(),localStorage.setItem("notification_permission_asked",Date.now())})}function r(){const t=new URLSearchParams(window.location.search),n=t.get("chatId"),e=t.get("chatType");n&&e&&setTimeout(()=>{const i=document.querySelector(`[data-chat-id="${n}"][data-chat-type="${e}"]`);i&&i.click()},1e3)}function d(){document.addEventListener("click",function(t){t.target&&t.target.closest(".notifications-icon")&&o()})}

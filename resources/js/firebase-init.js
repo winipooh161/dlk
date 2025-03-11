@@ -517,3 +517,21 @@ export {
     requestNotificationPermission,
     updateUnreadCounters
 };
+
+// Функция для отправки уведомлений через Firebase
+export function sendFirebaseNotification(token, title, body, data = {}) {
+    const notificationOptions = {
+        body: body,
+        icon: '/path/to/icon.png',
+        data: data,
+        requireInteraction: true,
+        renotify: true,
+        vibrate: [200, 100, 200]
+    };
+
+    if (Notification.permission === 'granted') {
+        new Notification(title, notificationOptions);
+    } else {
+        console.error('Разрешение на уведомления не предоставлено');
+    }
+}

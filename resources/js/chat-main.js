@@ -1,7 +1,6 @@
 import { initializeEmojiPicker } from './emoji-picker';
 import { attachMessageActionListeners } from './message-actions';
 import { formatTime, escapeHtml, scrollToBottom, filterMessages, renderMessages } from './chat-utils';
-import { showChatNotification, checkForNewMessages } from './notification';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Глобальная переменная для хранения ID последнего загруженного сообщения
